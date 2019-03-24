@@ -6,4 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".Activity.Inscription">
 
+    <EditText
+        android:id="@+id/tb_pseudo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="225dp"
+        android:ems="10"
+        android:hint="Pseudo"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/tb_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/tb_pseudo"
+        app:layout_constraintTop_toBottomOf="@+id/tb_pseudo" />
+
+    <EditText
+        android:id="@+id/tb_passwordLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:ems="10"
+        android:hint="Mot de passe"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/tb_email"
+        app:layout_constraintTop_toBottomOf="@+id/tb_email" />
+
+    <EditText
+        android:id="@+id/tb_repassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:hint="Confirmation"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/tb_passwordLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tb_passwordLogin" />
+
+    <Button
+        android:id="@+id/btn_inscriptionSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="97dp"
+        android:onClick="onClickEnregistrerInscription"
+        android:text="Inscription"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
