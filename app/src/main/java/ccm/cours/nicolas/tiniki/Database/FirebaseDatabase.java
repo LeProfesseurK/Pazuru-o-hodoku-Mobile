@@ -68,7 +68,7 @@ public class FirebaseDatabase {
                         Utilisateur utilisateur = new Utilisateur();
                         if(task.getResult().size() != 1){
                             // Pas la bonne récupération.
-                            //context.loginEchec();
+                            context.loginEchec();
                         }else{
                             // Membre trouvé.
                             DocumentSnapshot result = task.getResult().getDocuments().get(0);
@@ -79,7 +79,7 @@ public class FirebaseDatabase {
                             //membre.setMaPosition(new Position());
                             GlobalVariable.getInstance().setConnectedUtilisateur(utilisateur);
 
-                            //context.loginSuccess();
+                            context.loginSuccess();
                         }
 
                     }
