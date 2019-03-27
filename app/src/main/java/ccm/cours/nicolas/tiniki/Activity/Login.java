@@ -57,7 +57,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
 
     public void loginSuccess() {
         Toast.makeText(this, "Login succès !", Toast.LENGTH_SHORT).show();
-        Intent monIntent = new Intent(this, ActivityMainActivity.class);
+        Intent monIntent = new Intent(this, CarteOSM.class);
         startActivity(monIntent);
     }
 

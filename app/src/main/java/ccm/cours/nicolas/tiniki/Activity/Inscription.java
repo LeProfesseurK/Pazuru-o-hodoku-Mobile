@@ -63,7 +63,7 @@ public class Inscription extends AppCompatActivity {
         GlobalVariable.getInstance().setConnectedUtilisateur(newUtilisateur);
 
         Toast.makeText(this, "Inscription terminée !", Toast.LENGTH_SHORT).show();
-        Intent monIntent = new Intent(this, ActivityMainActivity.class);
+        Intent monIntent = new Intent(this, CarteOSM.class);
         startActivity(monIntent);
     }
 
