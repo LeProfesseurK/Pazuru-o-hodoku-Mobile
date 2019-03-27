@@ -38,7 +38,7 @@ public class Inscription extends AppCompatActivity {
 
     public void onClickEnregistrerInscription(View view) {
         if(mdp.getText().toString().equals(reMdp.getText().toString())) {
-            FirebaseDatabase.emailExiste(email.getText().toString(), this);
+            FirebaseDatabase.emailExiste(email.getText().toString(), this, "classique");
         }else{
             Toast.makeText(this, "Le mot de passe et sa confirmation ne sont pas identique.", Toast.LENGTH_SHORT).show();
         }
@@ -48,6 +48,7 @@ public class Inscription extends AppCompatActivity {
         newUtilisateur = new Utilisateur();
         newUtilisateur.setPseudoUtilisateur((pseudo.getText()).toString());
         newUtilisateur.setEmailUtilisateur((email.getText()).toString());
+        newUtilisateur.setTypeUtilisateur("classique");
         FirebaseDatabase.addUtilisateur(newUtilisateur, BoiteAOutils.crypteMotDePasse(mdp.getText().toString()), this);
     }
 

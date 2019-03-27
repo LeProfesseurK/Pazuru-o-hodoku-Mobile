@@ -18,8 +18,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import ccm.cours.nicolas.tiniki.Database.FirebaseDatabase;
+import ccm.cours.nicolas.tiniki.Entity.Utilisateur;
 import ccm.cours.nicolas.tiniki.R;
 import ccm.cours.nicolas.tiniki.Tools.BoiteAOutils;
+import ccm.cours.nicolas.tiniki.Tools.GlobalVariable;
 
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -77,9 +79,21 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(result.isSuccess()){
                 GoogleSignInAccount acct = result.getSignInAccount();
+                Utilisateur user = new Utilisateur();
+                user.setTypeUtilisateur("oauth");
+                user.setEmailUtilisateur(acct.getEmail());
+                GlobalVariable.getInstance().setConnectedUtilisateur(user);
+
+                FirebaseDatabase.emailExiste(user.getEmailUtilisateur(), this, "oauth");
+
                 /*Log.i("OAUTHG", acct.getDisplayName());
                 Log.i("OAUTHG", acct.toString());*/
             }
         }
+    }
+
+    public void finirInscription() {
+        Intent monIntent = new Intent(this, InscriptionOAuth.class);
+        startActivity(monIntent);
     }
 }

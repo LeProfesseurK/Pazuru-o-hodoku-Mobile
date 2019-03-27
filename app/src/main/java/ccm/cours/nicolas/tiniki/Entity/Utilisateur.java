@@ -8,6 +8,8 @@ public class Utilisateur {
 
     String emailUtilisateur;
 
+    String typeUtilisateur;
+
     public String getIdUtilisateur() {
         return idUtilisateur;
     }
@@ -30,5 +32,13 @@ public class Utilisateur {
 
     public void setEmailUtilisateur(String emailUtilisateur) {
         this.emailUtilisateur = emailUtilisateur;
+    }
+
+    public String getTypeUtilisateur() {
+        return typeUtilisateur;
+    }
+
+    public void setTypeUtilisateur(String typeUtilisateur) {
+        this.typeUtilisateur = typeUtilisateur;
     }
 }
