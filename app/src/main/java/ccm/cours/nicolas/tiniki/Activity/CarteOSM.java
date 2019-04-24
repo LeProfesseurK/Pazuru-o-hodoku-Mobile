@@ -9,15 +9,18 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import ccm.cours.nicolas.tiniki.R;
 
+import org.mapsforge.map.layer.download.tilesource.TileSource;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 
 public class CarteOSM extends AppCompatActivity implements LocationListener {
 
@@ -26,6 +29,7 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
     private double latitude;
     private double longitude;
     private double altitude;
+    private String idmarquer;
     private static final int id_demande_permission = 123;
 
     @Override
@@ -71,9 +75,9 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         }
 
         locationManager= (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000,0, this);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000,0, this);
+        mapOSM();
     }
 
     private  void mapOSM(){
@@ -81,14 +85,11 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         // Affichage map
         map = findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
+//        map.setTileSource(TileSource.);
         IMapController mapController = map.getController();
-//        if (premiereEntrer == "vrai"){
-//            mapController.setZoom(6.0);
-//        }
         mapController.setZoom(6.0);
-        map.setBuiltInZoomControls(true); //bouton zoom+/-
         map.setMultiTouchControls(true); // tactile pour zoom +/-
-        position(mapController);
+
 
     }
 
@@ -100,7 +101,8 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         longitude = location.getLongitude();
         altitude = location.getAltitude();
         Toast.makeText(this, "Latitude : " +latitude+" - Longitude : "+longitude, Toast.LENGTH_SHORT).show();
-        mapOSM();
+        IMapController mapController = map.getController();
+        position(mapController);
     }
 
     @Override
@@ -126,11 +128,37 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         map.getOverlayManager().clear();
 
         // marker
-//        Marker marquer = new Marker(map);
-//        marquer.setPosition(positionActuelle);
-//        marquer.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
-////        marquer.setAnchor(Marker.ANCHOR_TOP,Marker.ANCHOR_TOP);
-//        map.getOverlays().add(marquer);
+        Marker marquer = new Marker(map);
+        marquer.setPosition(positionActuelle);
+        marquer.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
+        //marquer.setAnchor(Marker.ANCHOR_TOP,Marker.ANCHOR_TOP);
+        marquer.setId("46568");
+        idmarquer = marquer.getId();
+        map.getOverlays().add(marquer);
+//        Toast.makeText(this, "Latitude : " + idmarquer , Toast.LENGTH_SHORT).show();
+
+        // test
+        GeoPoint posTEST = new GeoPoint(0, 0, 0);
+        final Marker marquerTEST = new Marker(map);
+        marquerTEST.setPosition(posTEST);
+        //marquer.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
+        marquerTEST.setAnchor(Marker.ANCHOR_TOP,Marker.ANCHOR_TOP);
+        marquerTEST.setId("Marquer test ");
+        marquerTEST.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker, MapView mapView) {
+                Toast.makeText(mapView.getContext(), "Id event : " + marker.getId() , Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        map.getOverlays().add(marquerTEST);
 
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        return super.onTouchEvent(event);
+    }
+
 }
