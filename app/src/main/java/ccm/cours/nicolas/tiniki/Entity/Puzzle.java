@@ -12,6 +12,7 @@ public abstract class Puzzle {
     private String enonce;
 
     private String solution;
+    // Voir pour avoir : List<String> solution;
 
     // Donnée supplémentaire : {URL Image, Choix multiple ([choix:”toto”,choix:”tata”...], etc...}
     // Transformé en : <"URL image", ".....">, <"Choix", ["toto", "tata"]> ...

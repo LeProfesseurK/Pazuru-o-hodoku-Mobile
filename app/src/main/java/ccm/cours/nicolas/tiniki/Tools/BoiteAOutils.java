@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoiteAOutils {
     public static String crypteMotDePasse(String mdp){
@@ -19,5 +21,9 @@ public class BoiteAOutils {
             response.append(line).append('\n');
         }
         return response.toString();
+    }
+
+    public static ArrayList<String> AleatoireElementsListe(List<String> listeChoix) {
+        return (ArrayList<String>) listeChoix;
     }
 }
