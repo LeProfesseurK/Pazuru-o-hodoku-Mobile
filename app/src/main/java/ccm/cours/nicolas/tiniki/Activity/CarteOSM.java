@@ -12,10 +12,12 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import ccm.cours.nicolas.tiniki.BuildConfig;
 import ccm.cours.nicolas.tiniki.R;
 
 import org.mapsforge.map.layer.download.tilesource.TileSource;
 import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
@@ -36,7 +38,7 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carte_osm);
-
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
         verifperm();
     }
 
@@ -89,8 +91,8 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         IMapController mapController = map.getController();
         mapController.setZoom(6.0);
         map.setMultiTouchControls(true); // tactile pour zoom +/-
-
-
+        map.setMaxZoomLevel((double) 12);
+        map.setMinZoomLevel((double) 6);
     }
 
     // implementation of Location listener
@@ -100,7 +102,7 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         altitude = location.getAltitude();
-        Toast.makeText(this, "Latitude : " +latitude+" - Longitude : "+longitude, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Latitude : " +latitude+" - Longitude : "+longitude, Toast.LENGTH_SHORT).show();
         IMapController mapController = map.getController();
         position(mapController);
     }
