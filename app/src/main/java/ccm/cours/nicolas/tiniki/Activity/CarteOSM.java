@@ -89,10 +89,11 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         map.setTileSource(TileSourceFactory.MAPNIK);
 //        map.setTileSource(TileSource.);
         IMapController mapController = map.getController();
-        mapController.setZoom(6.0);
+        mapController.setZoom(20.0);
         map.setMultiTouchControls(true); // tactile pour zoom +/-
-        map.setMaxZoomLevel((double) 12);
-        map.setMinZoomLevel((double) 6);
+        map.setMaxZoomLevel((double) 22);
+        map.setMinZoomLevel((double) 20);
+
     }
 
     // implementation of Location listener
