@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import ccm.cours.nicolas.tiniki.BuildConfig;
 import ccm.cours.nicolas.tiniki.Entity.Puzzle;
 import ccm.cours.nicolas.tiniki.R;
+import ccm.cours.nicolas.tiniki.Services.GPSLocalisationService;
 import ccm.cours.nicolas.tiniki.Tools.FabriquePuzzle;
 
 import org.mapsforge.map.layer.download.tilesource.TileSource;
@@ -41,9 +43,14 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_carte_osm);
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
+       // Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
+
+        setContentView(R.layout.activity_carte_osm);
+
         verifperm();
+        GPSLocalisationService.setContext(this);
+        startService(new Intent(this, GPSLocalisationService.class));
     }
 
     @Override

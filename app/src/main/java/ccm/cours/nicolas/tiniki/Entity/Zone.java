@@ -5,8 +5,8 @@ public class Zone {
     private Integer id;
     private String libelle;
   //  private Position positionCentre;
-    private Long latitude;
-    private Long longitude;
+    private double latitude;
+    private double longitude;
     private Integer rayon;
 
     public Integer getId() {
@@ -45,19 +45,19 @@ public class Zone {
         this.rayon = rayon;
     }
 
-    public Long getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Long latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public Long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Long longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 }

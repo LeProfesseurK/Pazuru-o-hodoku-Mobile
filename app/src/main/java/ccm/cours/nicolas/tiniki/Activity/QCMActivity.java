@@ -54,9 +54,9 @@ public class QCMActivity extends AppCompatActivity {
         // contenu => <"URL image", ".....">, <"Choix", ["toto", "tata"]>
         // Map du contenu ( reponse qcm )
 
-        List<String> listeChoix = (ArrayList<String>) lePuzzle.getContenu().get("Choix");
+       // List<String> listeChoix = (ArrayList<String>) lePuzzle.getContenu().get("Choix");
 
-        adapterRV = new AdapterCheckBox(BoiteAOutils.AleatoireElementsListe(listeChoix));
+       // adapterRV = new AdapterCheckBox(BoiteAOutils.AleatoireElementsListe(listeChoix));
         rvReponse.setAdapter(adapterRV);
 
     }

@@ -19,11 +19,13 @@ public abstract class Puzzle implements Serializable {
 
     // Donnée supplémentaire : {URL Image, Choix multiple ([choix:”toto”,choix:”tata”...], etc...}
     // Transformé en : <"URL image", ".....">, <"Choix", ["toto", "tata"]> ...
-    private Map<String, Object> contenu;
+    //private Map<String, Object> contenu;
+    private String contenu;
 
     // Récupére sous la forme : {indice:[indice1: “rouge”, indice2: “noir”, ...]}
     // Transformé en : ["rouge", "noir",...]
-    private ArrayList<String> indices;
+    //private ArrayList<String> indices;
+    private String indices;
 
     private String type;
 
@@ -76,19 +78,19 @@ public abstract class Puzzle implements Serializable {
         this.solution = solution;
     }
 
-    public Map<String, Object> getContenu() {
+    public String getContenu() {
         return contenu;
     }
 
-    public void setContenu(Map<String, Object> contenu) {
+    public void setContenu(String contenu) {
         this.contenu = contenu;
     }
 
-    public ArrayList<String> getIndices() {
+    public String getIndices() {
         return indices;
     }
 
-    public void setIndices(ArrayList<String> indices) {
+    public void setIndices(String indices) {
         this.indices = indices;
     }
 

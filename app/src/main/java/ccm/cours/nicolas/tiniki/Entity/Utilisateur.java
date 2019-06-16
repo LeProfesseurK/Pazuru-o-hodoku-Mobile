@@ -10,6 +10,8 @@ public class Utilisateur {
 
     String typeUtilisateur;
 
+    Position maPosition = new Position();
+
     public String getIdUtilisateur() {
         return idUtilisateur;
     }
@@ -40,5 +42,13 @@ public class Utilisateur {
 
     public void setTypeUtilisateur(String typeUtilisateur) {
         this.typeUtilisateur = typeUtilisateur;
+    }
+
+    public Position getMaPosition() {
+        return maPosition;
+    }
+
+    public void setMaPosition(Position maPosition) {
+        this.maPosition = maPosition;
     }
 }

@@ -7,7 +7,7 @@ public class PointApparition {
 
     private String description;
 
-    private Position position;
+    private Position position = new Position();
 
     private Puzzle puzzleDuJour;
 

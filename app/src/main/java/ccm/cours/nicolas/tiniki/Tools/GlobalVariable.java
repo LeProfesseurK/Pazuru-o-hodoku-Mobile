@@ -13,6 +13,8 @@ public class GlobalVariable {
 
     private List<Zone> listeDesZones;
 
+    private Zone zoneActuelle;
+
     private List<PointApparition> pointsApparitionDansZone;
 
     public static synchronized GlobalVariable getInstance(){
@@ -44,5 +46,13 @@ public class GlobalVariable {
 
     public void setPointsApparitionDansZone(List<PointApparition> lesPointsApparition){
         this.pointsApparitionDansZone = pointsApparitionDansZone;
+    }
+
+    public Zone getZoneActuelle() {
+        return zoneActuelle;
+    }
+
+    public void setZoneActuelle(Zone zoneActuelle) {
+        this.zoneActuelle = zoneActuelle;
     }
 }
