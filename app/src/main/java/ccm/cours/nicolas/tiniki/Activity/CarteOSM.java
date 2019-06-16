@@ -2,6 +2,7 @@ package ccm.cours.nicolas.tiniki.Activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,10 +11,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import ccm.cours.nicolas.tiniki.BuildConfig;
+import ccm.cours.nicolas.tiniki.Entity.Puzzle;
 import ccm.cours.nicolas.tiniki.R;
+import ccm.cours.nicolas.tiniki.Tools.FabriquePuzzle;
 
 import org.mapsforge.map.layer.download.tilesource.TileSource;
 import org.osmdroid.api.IMapController;
@@ -164,4 +168,34 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         return super.onTouchEvent(event);
     }
 
+    public void onClickTestMarker(View view) {
+        Puzzle unPuzzle = getDataPuzzle();
+        unPuzzle.lanceResolution(this);
+    }
+
+    private Puzzle getDataPuzzle() {
+        Puzzle unPuzzle = FabriquePuzzle.fabriquePuzzle("Ecrit");
+
+        unPuzzle.setId(1765);
+        unPuzzle.setDifficulte("Facile");
+        unPuzzle.setExp(2);
+        unPuzzle.setPiece(3);
+        unPuzzle.setType("Ecrit");
+
+        unPuzzle.setNom("Equations mystère");
+
+        unPuzzle.setEnonce("A, B, C et D sont des nombres à un chiffre." +
+                "\n Les équations suivantes sont toutes vraies." +
+                "\n A + C = D " +
+                "\n A x B = C " +
+                "\n C - B = B" +
+                "\n A x 4 = D" +
+                "\n " +
+                "\n Trouvez les chiffres représentés par chaque lettre." +
+                "\n La réponse devra comporter les quatre chiffres dans l'ordre A, B, C et D.");
+
+        unPuzzle.setSolution("2368");
+
+        return unPuzzle;
+    }
 }

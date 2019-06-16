@@ -16,10 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.QCMActivity"></activity>
+        <activity android:name=".Activity.EnigmeEcriteActivity"></activity>
+        <activity android:name=".Activity.QCMActivity" />
         <activity android:name=".Activity.InscriptionOAuth" />
         <activity android:name=".Activity.Inscription" />
-        <activity android:name=".Activity.CarteOSM"></activity>
+        <activity android:name=".Activity.CarteOSM" />
         <activity android:name=".Activity.Login" />
         <activity android:name=".Activity.ActivityMainActivity">
             <intent-filter>

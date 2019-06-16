@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ccm.cours.nicolas.tiniki.Entity.Puzzle;
+import ccm.cours.nicolas.tiniki.Entity.QCMPuzzle;
 import ccm.cours.nicolas.tiniki.R;
 import ccm.cours.nicolas.tiniki.Tools.AdapterCheckBox;
 import ccm.cours.nicolas.tiniki.Tools.BoiteAOutils;
@@ -40,9 +41,10 @@ public class QCMActivity extends AppCompatActivity {
 
         // Récupération du puzzle correspondant.
 
-        int position = getIntent().getExtras().getInt("positionPuzzle");
+        //int position = getIntent().getExtras().getInt("positionPuzzle");
+        Puzzle lePuzzle = (QCMPuzzle) getIntent().getExtras().getSerializable("positionPuzzle");
 
-        Puzzle lePuzzle = GlobalVariable.getInstance().getPointsApparitionDansZone().get(position).getPuzzleDuJour();
+        //Puzzle lePuzzle = GlobalVariable.getInstance().getPointsApparitionDansZone().get(position).getPuzzleDuJour();
 
         // Affichage du puzzle
 

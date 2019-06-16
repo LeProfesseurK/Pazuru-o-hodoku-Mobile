@@ -11,6 +11,7 @@ import ccm.cours.nicolas.tiniki.Database.FirebaseDatabase;
 import ccm.cours.nicolas.tiniki.Entity.Utilisateur;
 import ccm.cours.nicolas.tiniki.R;
 import ccm.cours.nicolas.tiniki.Tools.BoiteAOutils;
+import ccm.cours.nicolas.tiniki.Tools.FichierOutils;
 import ccm.cours.nicolas.tiniki.Tools.GlobalVariable;
 
 public class InscriptionOAuth extends AppCompatActivity {
@@ -32,6 +33,7 @@ public class InscriptionOAuth extends AppCompatActivity {
     public void inscriptionSuccess(String id) {
         GlobalVariable.getInstance().getConnectedUtilisateur().setIdUtilisateur(id);
         Toast.makeText(this, "Inscription terminée !", Toast.LENGTH_SHORT).show();
+        FichierOutils.verifDateJourFile(this);
         Intent monIntent = new Intent(this, CarteOSM.class);
         startActivity(monIntent);
     }

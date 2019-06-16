@@ -1,9 +1,12 @@
 package ccm.cours.nicolas.tiniki.Entity;
 
+import android.content.Context;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public abstract class Puzzle {
+public abstract class Puzzle implements Serializable {
 
     private Integer id;
 
@@ -30,12 +33,15 @@ public abstract class Puzzle {
 
     private Integer piece;
 
-
     // Abstract function
 
-    public abstract void lanceResolution();
+    public abstract void lanceResolution(Context activityBase);
 
+    // Lancé lorsque l'utilisateur a terminé de résoudre avec succés le puzzle (mémorisation du puzzle résolu)
+    public void resolutionTermine(){}
 
+    // Lancé lorsque l'utilisateur a s'est trompé sur le puzzle (mémorisation du puzzle avec réduction des points à gagner)
+    public void resolutionEchec(){}
 
     // Getter / Setter
     public Integer getId() {
@@ -117,4 +123,6 @@ public abstract class Puzzle {
     public void setPiece(Integer piece) {
         this.piece = piece;
     }
+
+    public abstract boolean estBonneReponse(String reponse);
 }

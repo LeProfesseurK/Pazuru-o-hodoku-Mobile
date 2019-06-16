@@ -4,7 +4,9 @@ public class Zone {
 
     private Integer id;
     private String libelle;
-    private Position positionCentre;
+  //  private Position positionCentre;
+    private Long latitude;
+    private Long longitude;
     private Integer rayon;
 
     public Integer getId() {
@@ -24,11 +26,15 @@ public class Zone {
     }
 
     public Position getPositionCentre() {
+        Position positionCentre = new Position();
+        positionCentre.setLatitude(this.getLatitude());
+        positionCentre.setLongitude(this.getLongitude());
         return positionCentre;
     }
 
     public void setPositionCentre(Position positionCentre) {
-        this.positionCentre = positionCentre;
+        this.setLatitude(positionCentre.getLatitude());
+        this.setLongitude(positionCentre.getLongitude());
     }
 
     public Integer getRayon() {
@@ -37,5 +43,21 @@ public class Zone {
 
     public void setRayon(Integer rayon) {
         this.rayon = rayon;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
     }
 }

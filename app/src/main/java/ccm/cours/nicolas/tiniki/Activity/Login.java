@@ -18,9 +18,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import ccm.cours.nicolas.tiniki.Database.FirebaseDatabase;
+import ccm.cours.nicolas.tiniki.Database.MysqlDatabase;
 import ccm.cours.nicolas.tiniki.Entity.Utilisateur;
 import ccm.cours.nicolas.tiniki.R;
 import ccm.cours.nicolas.tiniki.Tools.BoiteAOutils;
+import ccm.cours.nicolas.tiniki.Tools.FichierOutils;
 import ccm.cours.nicolas.tiniki.Tools.GlobalVariable;
 
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -56,6 +58,9 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     }
 
     public void loginSuccess() {
+//        String[] params = new String[0];
+        new MysqlDatabase("getAllZone").execute();
+        FichierOutils.verifDateJourFile(this);
         Toast.makeText(this, "Login succès !", Toast.LENGTH_SHORT).show();
         Intent monIntent = new Intent(this, CarteOSM.class);
         startActivity(monIntent);
