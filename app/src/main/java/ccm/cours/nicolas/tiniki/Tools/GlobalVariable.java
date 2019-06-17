@@ -1,5 +1,6 @@
 package ccm.cours.nicolas.tiniki.Tools;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ccm.cours.nicolas.tiniki.Entity.PointApparition;
@@ -15,7 +16,7 @@ public class GlobalVariable {
 
     private Zone zoneActuelle;
 
-    private List<PointApparition> pointsApparitionDansZone;
+    private List<PointApparition> pointsApparitionDansZone = new ArrayList<PointApparition>();
 
     public static synchronized GlobalVariable getInstance(){
         if(null == gv){

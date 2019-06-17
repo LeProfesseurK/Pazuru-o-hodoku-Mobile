@@ -17,6 +17,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import ccm.cours.nicolas.tiniki.Activity.CarteOSM;
 import ccm.cours.nicolas.tiniki.Entity.PointApparition;
@@ -32,16 +33,17 @@ public class MysqlDatabase extends AsyncTask {
     * où typeRequete est le nom donnée à la requete à faire. Il détermine la page php a appeler
     * Params... et la liste des parametres à envoyer à la requete mysql
     * */
-
+    private static CarteOSM carte;
     private String typeRequete;
     public MysqlDatabase(String typeRequete) {
         this.typeRequete = typeRequete;
     }
+    private List<PointApparition> listPNTAPP = new ArrayList<PointApparition>();
 
     protected String doInBackground(Object[] data) {
         String url;
         InputStream is;
-
+        Log.i("LPK_JSON", "doinback");
         switch(typeRequete){
             case "getAllZone":
                 url = "http://51.75.23.222/app.php/getAllZone/";
@@ -97,7 +99,7 @@ public class MysqlDatabase extends AsyncTask {
                     String result =  BoiteAOutils.readIt(is);
                     Log.v("titi", result);
 
-                    CarteOSM carte = (CarteOSM) data[1];
+                    carte = (CarteOSM) data[1];
                     ArrayList<PointApparition> pointApps = new ArrayList<PointApparition>();
                    // TODO //////////////////////
                     JSONArray json = new JSONArray(result);
@@ -126,6 +128,8 @@ public class MysqlDatabase extends AsyncTask {
                         lepointApp.getPuzzleDuJour().setExp(jsonPuzzle.getInt("exp"));
                         lepointApp.getPuzzleDuJour().setPiece(jsonPuzzle.getInt("piece"));
 
+                        Log.i("LPK_JSON_ARRAY","pos Long : "+lepointApp.getPosition().getLongitude());
+                        Log.i("LPK_JSON_ARRAY","pos Lat : "+lepointApp.getPosition().getLatitude());
                         Log.i("LPK_JSON_ARRAY","id : "+lepointApp.getPuzzleDuJour().getId());
                         Log.i("LPK_JSON_ARRAY","nom : "+lepointApp.getPuzzleDuJour().getNom());
                         Log.i("LPK_JSON_ARRAY","enonce : "+lepointApp.getPuzzleDuJour().getEnonce());
@@ -141,14 +145,16 @@ public class MysqlDatabase extends AsyncTask {
                     }
 
                     GlobalVariable.getInstance().setPointsApparitionDansZone(pointApps);
+                    listPNTAPP = pointApps;
                     // TODO //////////////////////
                     // TODO : MAJ carte.
-                    carte.miseAJourPointApparition();
+
 
                 } catch (IOException e) {
-                    Log.v("titi", "non co");
+                    Log.v("LPK_JSON", "non co");
                     e.printStackTrace();
                 } catch (JSONException e) {
+                    Log.v("LPK_JSON", "error exception");
                     e.printStackTrace();
                 }
                 break;
@@ -156,8 +162,16 @@ public class MysqlDatabase extends AsyncTask {
         return null;
     }
 
-    protected void onPostExecute(String result){
-        Log.v("titi", result);
+    @Override
+    protected void onPostExecute(Object o) {
+        switch(typeRequete) {
+            case "getPuzzleWithZone":
+                carte.miseAJourPointApparition(listPNTAPP);
+                break;
+        }
+        super.onPostExecute(o);
     }
+
+
 
 }

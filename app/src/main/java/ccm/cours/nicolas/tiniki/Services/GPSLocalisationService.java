@@ -47,10 +47,16 @@ public class GPSLocalisationService extends Service {
                 GlobalVariable.getInstance().getConnectedUtilisateur().getMaPosition().setLatitude(location.getLatitude());
 
                 if(GlobalVariable.getInstance().getZoneActuelle() == null || GlobalVariable.getInstance().getConnectedUtilisateur().getMaPosition().getDistanceWithOtherPosition(GlobalVariable.getInstance().getZoneActuelle().getPositionCentre()) > GlobalVariable.getInstance().getZoneActuelle().getRayon()*1000){
+                    Log.i("LPK_DEBUG", "null ou endehors");
                     // Pas de zone ou en dehors de la zone actuelle
                 // Verifier Si il y a changement de zone => getPointApparition / à la zone.
                     for(Zone laZone : GlobalVariable.getInstance().getListeDesZones()){
+                    Log.i("LPK_DEBUG", "id : " + laZone.getId());
+                    Log.i("LPK_DEBUG", "dist : " + GlobalVariable.getInstance().getConnectedUtilisateur().getMaPosition().getDistanceWithOtherPosition(laZone.getPositionCentre()));
+                    Log.i("LPK_DEBUG", "zone : " + laZone.getRayon()*1000);
+
                         if(GlobalVariable.getInstance().getConnectedUtilisateur().getMaPosition().getDistanceWithOtherPosition(laZone.getPositionCentre()) <= laZone.getRayon()*1000){
+                        Log.i("LPK_DEBUG", "Dans zone");
                             // Dans la zone
                             GlobalVariable.getInstance().setZoneActuelle(laZone);
 

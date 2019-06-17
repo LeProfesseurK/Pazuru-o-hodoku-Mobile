@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -31,6 +32,8 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
+
+import java.util.List;
 
 public class CarteOSM extends AppCompatActivity implements LocationListener {
 
@@ -208,9 +211,11 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         return unPuzzle;
     }
 
-    public void miseAJourPointApparition(){
+    public void miseAJourPointApparition(final List<PointApparition> pntApps){
         Integer nComp = 0;
-        for(PointApparition pntApp : GlobalVariable.getInstance().getPointsApparitionDansZone()){
+        Log.i("LPK_MAJ", "MAJ Map");
+        for(PointApparition pntApp : pntApps){
+            Log.i("LPK_MAJ", pntApp.getNom());
             // TODO : parcours fichier
             GeoPoint posPuzzle = new GeoPoint(pntApp.getPosition().getLatitude(), pntApp.getPosition().getLongitude(), 0);
             final Marker marquerPuzzle = new Marker(map);
@@ -222,7 +227,7 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
                 @Override
                 public boolean onMarkerClick(Marker marker, MapView mapView) {
                     Toast.makeText(mapView.getContext(), "Id event : " + marker.getId() , Toast.LENGTH_SHORT).show();
-                    GlobalVariable.getInstance().getPointsApparitionDansZone().get(Integer.parseInt(marker.getId())).getPuzzleDuJour().lanceResolution(getBaseContext());
+                    pntApps.get(Integer.parseInt(marker.getId())).getPuzzleDuJour().lanceResolution(getBaseContext());
                     return false;
                 }
             });
