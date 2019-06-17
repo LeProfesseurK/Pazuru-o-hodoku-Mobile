@@ -16,10 +16,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import ccm.cours.nicolas.tiniki.BuildConfig;
+import ccm.cours.nicolas.tiniki.Entity.PointApparition;
 import ccm.cours.nicolas.tiniki.Entity.Puzzle;
 import ccm.cours.nicolas.tiniki.R;
 import ccm.cours.nicolas.tiniki.Services.GPSLocalisationService;
 import ccm.cours.nicolas.tiniki.Tools.FabriquePuzzle;
+import ccm.cours.nicolas.tiniki.Tools.GlobalVariable;
 
 import org.mapsforge.map.layer.download.tilesource.TileSource;
 import org.osmdroid.api.IMapController;
@@ -43,7 +45,7 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
+        //Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
        // Configuration.getInstance().load(getApplicationContext(), PreferenceManager.getDefaultSharedPreferences(getApplicationContext()));
 
         setContentView(R.layout.activity_carte_osm);
@@ -152,7 +154,7 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
 //        Toast.makeText(this, "Latitude : " + idmarquer , Toast.LENGTH_SHORT).show();
 
         // test
-        GeoPoint posTEST = new GeoPoint(0, 0, 0);
+        GeoPoint posTEST = new GeoPoint(3.3, 49.84, 0);
         final Marker marquerTEST = new Marker(map);
         marquerTEST.setPosition(posTEST);
         //marquer.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
@@ -204,5 +206,28 @@ public class CarteOSM extends AppCompatActivity implements LocationListener {
         unPuzzle.setSolution("2368");
 
         return unPuzzle;
+    }
+
+    public void miseAJourPointApparition(){
+        Integer nComp = 0;
+        for(PointApparition pntApp : GlobalVariable.getInstance().getPointsApparitionDansZone()){
+            // TODO : parcours fichier
+            GeoPoint posPuzzle = new GeoPoint(pntApp.getPosition().getLatitude(), pntApp.getPosition().getLongitude(), 0);
+            final Marker marquerPuzzle = new Marker(map);
+            marquerPuzzle.setPosition(posPuzzle);
+            //marquer.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
+            marquerPuzzle.setAnchor(Marker.ANCHOR_TOP,Marker.ANCHOR_TOP);
+            marquerPuzzle.setId(nComp.toString());
+            marquerPuzzle.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker, MapView mapView) {
+                    Toast.makeText(mapView.getContext(), "Id event : " + marker.getId() , Toast.LENGTH_SHORT).show();
+                    GlobalVariable.getInstance().getPointsApparitionDansZone().get(Integer.parseInt(marker.getId())).getPuzzleDuJour().lanceResolution(getBaseContext());
+                    return false;
+                }
+            });
+            map.getOverlays().add(marquerPuzzle);
+            nComp++;
+        }
     }
 }

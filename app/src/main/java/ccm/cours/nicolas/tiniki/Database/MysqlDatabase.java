@@ -143,6 +143,7 @@ public class MysqlDatabase extends AsyncTask {
                     GlobalVariable.getInstance().setPointsApparitionDansZone(pointApps);
                     // TODO //////////////////////
                     // TODO : MAJ carte.
+                    carte.miseAJourPointApparition();
 
                 } catch (IOException e) {
                     Log.v("titi", "non co");

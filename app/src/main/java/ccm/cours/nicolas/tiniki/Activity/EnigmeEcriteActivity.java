@@ -69,4 +69,8 @@ public class EnigmeEcriteActivity extends AppCompatActivity {
         }
         Log.i("LPK_FILE", FichierOutils.readFromFile(this));
     }
+
+    public void onClickQuitter(View view) {
+        this.finish();
+    }
 }
